@@ -1,0 +1,63 @@
+.login {
+	&::before {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		content: "";
+		z-index: -2;
+		top: 0;
+		left: 0;
+		background-size: cover;
+		background-position: center;
+		filter: blur(3px);
+	}
+	&::after {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		content: "";
+		z-index: -1;
+		top: 0;
+		left: 0;
+		backdrop-filter: brightness(0.75);
+		-webkit-backdrop-filter: brightness(0.75);
+	}
+
+	// margin-bottom: 2rem;
+	.media {
+		&.patient_media {
+			background: linear-gradient(60deg, #26c6da, #00acc1);
+			box-shadow: none;
+			&:hover {
+				box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
+			}
+		}
+		&.provider_media {
+			background: linear-gradient(60deg, #6aa1cc, #0178d4);
+			box-shadow: none;
+			&:hover {
+				box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px #6abaf8;
+			}
+		}
+	}
+	.language-btn {
+		cursor: pointer;
+		&:hover {
+			color: $secondary;
+			background-color: transparent;
+			text-decoration: underline;
+		}
+	}
+	.language-btn-disable {
+		cursor: unset;
+		font-weight: 700;
+	}
+}
+
+@media (max-width: 435px) {
+	.login-modal {
+		.secondary {
+			margin-top: 0.5rem;
+		}
+	}
+}

@@ -1,0 +1,67 @@
+.otp-box {
+	width: 2.5em !important;
+	padding: 0.375rem .25rem;
+}
+
+.input-error {
+	border-color: $danger !important;
+	&:focus {
+		outline-color: $danger !important;
+		border-color: $danger !important;
+	}
+}
+
+.input-group-text {
+	img {
+		width: 20px;
+	}
+	background-color: transparent;
+}
+
+.error {
+	color: $danger;
+	font-size: 80%;
+	// margin-top: 3px;
+
+	.icon {
+		color: #fff;
+		background-color: $danger;
+		border-radius: 50%;
+		letter-spacing: 4px;
+		padding-left: 6px;
+		padding-right: 2px;
+	}
+}
+
+.otp-section {
+	.customError {
+		text-align: center;
+	}
+}
+.customAddonDropdown {
+	background-color: #e6f4ff;
+	color: $dark;
+	width: 66px;
+	padding: 0px;
+	border: transparent;
+	border-right: 2px solid #fff;
+	font-weight: 600;
+	font-size: 1rem;
+	&::after {
+		margin-left: 10px;
+	}
+}
+.input-group-prepend {
+	margin-right: 0px;
+}
+
+.currency {
+	.form-control {
+		height: 63px;
+	}
+}
+
+.rbt-token {
+	background-color: $primary !important;
+	color: $light !important;
+}
