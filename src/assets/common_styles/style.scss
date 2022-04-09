@@ -24,7 +24,8 @@ a:not([href]) {
 	text-decoration: none;
 }
 .header {
-	background-color: rgba($color: $second, $alpha: 1.0) !important;
+	// margin-top: -60px;
+	background-color: rgba($color: $primary, $alpha: 1.0) !important;
 }
 
 .header_logo {

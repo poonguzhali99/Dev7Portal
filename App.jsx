@@ -28,11 +28,9 @@ import Login from './src/pages/login';
 import { logIn, logOut } from './src/services/auth/action';
 import { getUserDetails } from './src/utils/common-utils';
 import Sidebar from './src/components/sidebar';
+import Header from './src/components/header';
 
 const App = React.memo(() => {
-	const { SubMenu } = Menu;
-	const { Header, Content, Sider } = Layout;
-
 	const dispatch = useDispatch();
 	const { isLoggedIn } = useSelector(({ authReducer }) => {
 		return {
@@ -54,9 +52,9 @@ const App = React.memo(() => {
 		validateAuth();
 	}, []);
 	const validateAuth = () => {
-		const session = load('session');
-		let userdetails = load('userdetails');
-		console.log('userdetails', userdetails);
+		const session = load('userdetails');
+		// let userdetails = load('userdetails');
+		// console.log('userdetails', userdetails);
 		// dispatch(getUserDetails(userDetails));
 		if (session) {
 			dispatch(logIn(session));
@@ -80,6 +78,7 @@ const App = React.memo(() => {
 		isLoggedIn ? (
 			<section>
 				<div className="d-flex">
+					{/* <Header /> */}
 					<Sidebar />
 					<Switch>
 						{routes.map((route, index) => (

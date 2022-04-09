@@ -51,22 +51,22 @@ const generateComponent = (data) => {
 				if (objKey == label) findObjectLabel = objKey;
 			}
 		}
-		list.sort((a, b) => {
-			var labelA, labelB;
-			if (findObjectLabel) {
-				for (let val in a) {
-					if (val == label) {
-						labelA = a[label] && a[label].toLowerCase();
-						labelB = b[label] && b[label].toLowerCase();
-						if (labelA < labelB) return -1;
-					}
-				}
-			} else {
-				labelA = a.toLowerCase();
-				labelB = b.toLowerCase();
-				if (labelA < labelB) return -1;
-			}
-		});
+		// list.sort((a, b) => {
+		// 	var labelA, labelB;
+		// 	if (findObjectLabel) {
+		// 		for (let val in a) {
+		// 			if (val == label) {
+		// 				labelA = a[label] && a[label].toLowerCase();
+		// 				labelB = b[label] && b[label].toLowerCase();
+		// 				if (labelA < labelB) return -1;
+		// 			}
+		// 		}
+		// 	} else {
+		// 		labelA = a.toLowerCase();
+		// 		labelB = b.toLowerCase();
+		// 		if (labelA < labelB) return -1;
+		// 	}
+		// });
 		let optionList = list.map((data, index) => {
 			return (
 				<option key={index} value={keyword ? data[keyword] : data}>
@@ -81,7 +81,7 @@ const generateComponent = (data) => {
 					<Input
 						type="select"
 						id={name}
-						disabled={disable}
+						disabled={disabled}
 						{...field}
 						className={`${errors[name] && touched[name] ? 'input-error' : ''} ${_isEmpty(field.value)
 							? 'font-weight-normal placeholder-color'

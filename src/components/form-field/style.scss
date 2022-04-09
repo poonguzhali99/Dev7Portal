@@ -18,6 +18,12 @@
 	background-color: transparent;
 }
 
+.input-group > .form-control,
+.input-group > .form-select {
+	background-color: $white !important;
+	height: 45px;
+}
+
 .error {
 	color: $danger;
 	font-size: 80%;
@@ -33,11 +39,6 @@
 	}
 }
 
-.otp-section {
-	.customError {
-		text-align: center;
-	}
-}
 .customAddonDropdown {
 	background-color: #e6f4ff;
 	color: $dark;

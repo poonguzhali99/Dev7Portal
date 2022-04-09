@@ -1,4 +1,4 @@
-import { USER_DETAILS, USER_PROFILE_DETAILS } from './action-types';
+import { USER_DETAILS } from './action-types';
 
 export const userDetailsReducer = (
 	state = {
@@ -13,10 +13,7 @@ export const userDetailsReducer = (
 			return {
 				...state,
 				requesting: false,
-				response: {
-					...state.response,
-					...payload
-				}
+				response: payload
 			};
 
 		default:

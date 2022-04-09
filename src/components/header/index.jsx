@@ -13,7 +13,9 @@ import { logOut } from '../../services/auth/action';
 import Sidebar from '../sidebar';
 import SideNav from './side-nav';
 
+import { Layout, Menu, Breadcrumb } from 'antd';
 const Header = () => {
+	const { Header, Content, Footer } = Layout;
 	// const { userName } = useSelector(({ AuthReducer }) => ({
 	// 	userName: _get(AuthReducer, 'name', '')
 	// }));
@@ -22,6 +24,13 @@ const Header = () => {
 	const navigateToDashboard = () => {
 		history.push('/');
 	};
+	// return (
+	// 	<Layout>
+	// 		<Header className="bg-primary header">
+	// 			<img className="bg-white logo" src={home} />
+	// 		</Header>
+	// 	</Layout>
+	// );
 
 	return (
 		<div>

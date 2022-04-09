@@ -56,7 +56,7 @@ const API_CALL = ({
 				params,
 				headers: header,
 				validateStatus: (status) => {
-					if (load('session') && status == 401) return false;
+					if (status == 401) return false;
 					else return true; // I'm always returning true, you may want to do it depending on the status received
 				}
 			}).then((response) => {

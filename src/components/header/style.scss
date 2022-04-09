@@ -1,4 +1,11 @@
 .header {
+	.logo {
+		height: 120;
+		width: 120;
+		background-color: $white;
+	}
+	height: 100px !important;
+	background-color: $primary !important;
 	.vl {
 		border-left: 1px solid $light;
 		height: 30px;

@@ -1,17 +1,39 @@
-export const constants = {
-	role: {
-		provider: 'provider'
-	}, 
-    apiResponseCodes : {
-        OK: 200,
-        UNAUTHORIZED: 401,
-        INTERNAL_SERVER_ERROR: 500,
-        NOT_FOUND: 404,
-        BAD_REQUEST: 400
+// import { images } from './config';
 
-    },
-    urlType: {
-		patient360: 'patient360'
+export const constants = {
+	userRole: {
+		teacher: 'Teacher',
+		admin: 'Admin',
+		parent: 'Parent'
 	}
 };
 
+export const staticVariables = {
+	branchList: [
+		{
+			id: 'SLESBP',
+			name: "St. Andrew's School, Bowenpally",
+			location: 'Hyderabad'
+		},
+		{
+			id: 'LEETMP',
+			name: "St. Andrew's School, Marredpally",
+			location: 'Hyderabad'
+		},
+		{
+			id: 'SLESKS',
+			name: "St. Andrew's School, Keesara",
+			location: 'Hyderabad'
+		},
+		{
+			id: 'WMA',
+			name: 'Winmore Academy',
+			location: 'Bangalore'
+		},
+		{
+			id: 'SLESAK',
+			name: 'Akira',
+			location: 'Hyderabad'
+		}
+	]
+};

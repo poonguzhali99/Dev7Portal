@@ -48,7 +48,13 @@
 	font-weight: 700;
 }
 
-$theme-colors: ("primary": $primary, "danger": $danger, "secondary": $secondary, 'light': $light);
+$theme-colors: (
+	"primary": $primary,
+	"btn-primary": $primaryButton,
+	"danger": $danger,
+	"secondary": $secondary,
+	'light': $light
+);
 $body-bg: transparent;
 // $body-color: $dark;
 
@@ -177,15 +183,15 @@ label {
 	color: $dark !important;
 	// border-radius: 2px;
 	// border: 2px solid #dce4ec; // outline: 1px solid transparent;
-	// background-color: #e6f4ff;
+	background-color: $white;
 	// border-top-width: 0;
 	// border-right-width: 0;
 	// border-left-width: 0;
 	// border-bottom: 2px solid #e6f4ff;
 	&:focus {
-		// outline: 1px solid $primary;
-		border-bottom: 2px solid $primary;
-		// background-color: #e6f4ff;
+		outline: 1px solid $second;
+		border-bottom: 2px solid $second;
+		background-color: $white;
 	}
 
 	&.placeholder-color {
@@ -214,11 +220,11 @@ label {
 	.form-control {
 		font-family: "SegoeUI";
 		font-size: 1rem;
-		height: 45px;
+		min-height: 45px;
 		box-shadow: none;
 		color: $dark;
 		border-radius: 2px;
-		background-color: #e6f4ff;
+		background-color: $white;
 		border-top-width: 0;
 		border-right-width: 0;
 		border-left-width: 0;
@@ -226,7 +232,7 @@ label {
 		border-bottom: 2px solid #e6f4ff;
 		&:focus {
 			border-bottom: 2px solid $primary;
-			background-color: #e6f4ff;
+			background-color: $white;
 		}
 
 		&.placeholder-color {

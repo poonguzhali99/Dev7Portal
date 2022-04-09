@@ -3,10 +3,10 @@ import store from '../../store';
 import * as types from './action-types';
 import _isEmpty from 'lodash/isEmpty';
 import { useSelector } from 'react-redux';
+import { getUserDetails } from '../user-details/action';
 
 export const logIn = (data) => {
-	save('session', data.emailid, { secure: true });
-	save('userdetails', data);
+	store.dispatch(getUserDetails(data));
 	return {
 		type: types.LOG_IN
 	};
