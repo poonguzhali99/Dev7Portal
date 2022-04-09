@@ -28,7 +28,8 @@ const Login = () => {
 		<div>
 			{/* <Header /> */}
 			<div className="container-fluid login">
-				<Row className="d-flex">
+				<Row>
+					{/* className="d-flex justify-content-center align-items-center"> */}
 					<Col>
 						<img src={bpLogin} />
 					</Col>

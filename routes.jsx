@@ -11,12 +11,12 @@ export const routes = [
 		exact: true,
 		icon: 'home',
 		main: () => <Dashboard />
+	},
+	{
+		path: '/home',
+		name: 'Home',
+		exact: true,
+		icon: 'home',
+		main: () => <Home />
 	}
-	// {
-	// 	path: '/home',
-	// 	name: 'Home',
-	// 	exact: true,
-	// 	icon: 'home',
-	// 	main: () => <Home />
-	// }
 ];

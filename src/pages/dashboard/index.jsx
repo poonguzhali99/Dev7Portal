@@ -39,7 +39,6 @@ import Header from '../../components/header';
 import DateFilter from '../../components/date-filter';
 import API_CALL from '../../services';
 import moment from 'moment';
-import { labReport } from './sample';
 import FormField from '../../components/form-field';
 import { Link, useHistory } from 'react-router-dom';
 import { getAcademicYear, setActiveAcademicYear } from '../../services/basic-details/action';
@@ -131,8 +130,6 @@ const Dashboard = () => {
 	}
 	return (
 		<div className="container-fluid container-xl dashboard">
-			<Header />
-
 			<h3>Notification Groups</h3>
 			{classGroup.length > 0 && (
 				<div>

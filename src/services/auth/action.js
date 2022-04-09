@@ -12,7 +12,8 @@ export const logIn = (data) => {
 	};
 };
 export const logOut = () => {
-	remove('session');
+	// remove('session');
+	remove('userdetails');
 	store.dispatch({ type: 'CLEAR_DATA' });
 	return {
 		type: types.LOG_OUT

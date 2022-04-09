@@ -31,6 +31,8 @@ import Sidebar from './src/components/sidebar';
 import Header from './src/components/header';
 
 const App = React.memo(() => {
+	const { SubMenu } = Menu;
+	const { Content, Footer, Sider } = Layout;
 	const dispatch = useDispatch();
 	const { isLoggedIn } = useSelector(({ authReducer }) => {
 		return {
@@ -76,25 +78,36 @@ const App = React.memo(() => {
 
 	const renderSection = () =>
 		isLoggedIn ? (
-			<section>
-				<div className="d-flex">
-					{/* <Header /> */}
-					<Sidebar />
-					<Switch>
-						{routes.map((route, index) => (
-							<Route key={index} path={route.path} exact={route.exact} children={<route.main />} />
-						))}
-						<Redirect to="/dashboard" />
-					</Switch>
-				</div>
-			</section>
+			// <section>
+			<Layout>
+				<Header />
+				<Sidebar />
+				{/* <Layout> */}
+				<Layout className="site-layout">
+					<Content className="body-content" style={{ margin: '110px 0 0 280px', overflow: 'auto' }}>
+						<Switch>
+							{routes.map((route, index) => (
+								<Route key={index} path={route.path} exact={route.exact} children={<route.main />} />
+							))}
+							<Redirect to="/dashboard" />
+						</Switch>
+					</Content>
+				</Layout>
+			</Layout>
 		) : (
-			<section>
-				<Switch>
-					<Route path={'/login'} component={Login} />
-					<Redirect to={'/login'} />
-				</Switch>
-			</section>
+			// </section>
+			<Layout>
+				<Header />
+				{/* <Layout> */}
+				<Layout className="site-layout">
+					<Content className="body-content" style={{ margin: '110px 0 0 0', overflow: 'auto' }}>
+						<Switch>
+							<Route path={'/login'} component={Login} />
+							<Redirect to={'/login'} />
+						</Switch>
+					</Content>
+				</Layout>
+			</Layout>
 		);
 	return (
 		<BrowserRouter>
