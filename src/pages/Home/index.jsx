@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { NavLink,Link } from 'react-router-dom';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
 import './style.scss';
@@ -9,61 +10,125 @@ const { Header, Content, Sider } = Layout;
 const Home = () => {
 	return (
 		<Layout>
-			<Header className="header">
-				<div className="logo" />
-				<Menu theme="dark" mode="horizontal" defaultSelectedKeys={[ '2' ]}>
-					<Menu.Item key="1">nav 1</Menu.Item>
-					<Menu.Item key="2">nav 2</Menu.Item>
-					<Menu.Item key="3">nav 3</Menu.Item>
-				</Menu>
-			</Header>
-			<Layout>
-				<Sider width={200} className="site-layout-background">
-					<Menu
-						mode="inline"
-						defaultSelectedKeys={[ '1' ]}
-						defaultOpenKeys={[ 'sub1' ]}
-						style={{ height: '100%', borderRight: 0 }}
-					>
-						<SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-							<Menu.Item key="1">option1</Menu.Item>
-							<Menu.Item key="2">option2</Menu.Item>
-							<Menu.Item key="3">option3</Menu.Item>
-							<Menu.Item key="4">option4</Menu.Item>
-						</SubMenu>
-						<SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-							<Menu.Item key="5">option5</Menu.Item>
-							<Menu.Item key="6">option6</Menu.Item>
-							<Menu.Item key="7">option7</Menu.Item>
-							<Menu.Item key="8">option8</Menu.Item>
-						</SubMenu>
-						<SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-							<Menu.Item key="9">option9</Menu.Item>
-							<Menu.Item key="10">option10</Menu.Item>
-							<Menu.Item key="11">option11</Menu.Item>
-							<Menu.Item key="12">option12</Menu.Item>
-						</SubMenu>
-					</Menu>
-				</Sider>
-				{/* <Layout style={{ padding: '0 24px 24px' }}>
-					<Breadcrumb style={{ margin: '16px 0' }}>
-						<Breadcrumb.Item>Home</Breadcrumb.Item>
-						<Breadcrumb.Item>List</Breadcrumb.Item>
-						<Breadcrumb.Item>App</Breadcrumb.Item>
-					</Breadcrumb>
-					<Content
-						className="site-layout-background"
-						style={{
-							padding: 24,
-							margin: 0,
-							minHeight: 280
-						}}
-					>
-						Content
-					</Content>
-				</Layout> */}
+		 <div
+            className="contain"
+            style={{
+                backgroundImage: `url("img/banner.png")`,
+                display: 'flex',
+                flexDirection: 'column'
+            }}
+        >
+            <hr />
+            <div className="container" style={{ display: 'flex' }}>
+                <div
+                    className="row"
+                    style={{
+                        backgroundImage: `url("img/banner.png")`
+                    }}
+                >
+                    <nav className="navbarmain">
+                        <div className="navbar-text">
+                            <div className="ulDv">
+                                <ul style={{ padding: '0px' }}>
+                                    <li className="navlist">
+                                        <NavLink
+                                            to="#"
+                                            activeStyle={{
+                                                color: 'red'
+                                            }}
+                                        >
+                                            {' '}
+                                            About Us{' '}
+                                        </NavLink>
+                                    </li>
+
+                                    <li className="navlist">
+                                        <NavLink to="#" activeStyle={{ color: 'red' }}>
+                                            {' '}
+                                            Privacy{' '}
+                                        </NavLink>
+                                    </li>
+
+                                    <li className="navlist">
+                                        <NavLink to="#" activeStyle={{ color: 'red' }}>
+                                            {' '}
+                                            Terms & Conditions{' '}
+                                        </NavLink>
+                                    </li>
+
+                                    <li className="navlist">
+                                        <NavLink to="#" activeStyle={{ color: 'red' }}>
+                                            {' '}
+                                            Contact Us{' '}
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </div>
+                            {/* <li>
+                      <button  className={show?"closebtnstnactive":"closebtnstn"} onClick={change}>Hyderabad  </button>
+                               </li>
+
+                               <li>
+                       <button className={show1?"closebtnstnactive":"closebtnstn"} onClick={change1}>Bangalore </button>
+                     </li>
+                   </ul> */}
+                        </div>
+                    </nav>
+                </div>
+
+                <div style={{ height: '100%' }}>
+                    <NavLink to="#" activeStyle={{ color: 'red' }}>
+                        <img
+                            style={{ marginRight: '30px', marginTop: '10px' }}
+                            src="https://live.ae-erp.in/Content/img/AEERPLogoNew.jpeg"
+                        />
+                    </NavLink>
+                </div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'start', marginLeft: '7%', height: '106px' }}>
+                <img style={{ width: '25%' }} src="https://live.ae-erp.in/Content/img/Choseimage.png" />
+            </div>
+            <hr style={{ border: '1px solid red' }} />
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'start',
+                    marginLeft: '7%',
+                    marginTop: '30px',
+                    justifyContent: 'space-around',
+                    flexWrap: 'wrap'
+                }}
+            >
+                <div>
+                    <NavLink to="#">
+                        <img src="https://live.ae-erp.in/Content/img/SLESKSimage.png" />
+                    </NavLink>
+                </div>
+                <div>
+                    <NavLink to="#">
+                        <img src="https://live.ae-erp.in/Content/img/SLESAKimage.png" />
+                    </NavLink>
+                </div>
+                <div>
+                    <NavLink to="./login">
+                        <img src="https://live.ae-erp.in/Content/img/SLESBPImage.png" />
+                    </NavLink>
+                </div>
+                <div>
+                    <NavLink to="#">
+                        <img src="https://live.ae-erp.in/Content/img/LEETMPimage.png" />
+                    </NavLink>
+                </div>
+                <div>
+                    <NavLink to="#">
+                        <img src="https://live.ae-erp.in/Content/img/WMAimage.png" />
+                    </NavLink>
+                </div>
+            </div>
+            <hr style={{ border: '1px solid red' }} />
+        </div>
 			</Layout>
-		</Layout>
+		
 	);
 };
 export default Home;

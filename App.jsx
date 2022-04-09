@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment, Suspense, lazy } from 'react';
-import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import { Route, BrowserRouter, Switch, Redirect,NavLink,Link } from 'react-router-dom';
 import { ReactNotifications } from 'react-notifications-component';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { load } from 'react-cookies';
@@ -24,7 +24,7 @@ import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.c
 import 'react-tagsinput/react-tagsinput.css';
 import 'react-datetime/css/react-datetime.css';
 import Login from './src/pages/login';
-
+import Home from './src/pages/Home';
 import { logIn, logOut } from './src/services/auth/action';
 import { getUserDetails } from './src/utils/common-utils';
 import Sidebar from './src/components/sidebar';
@@ -91,8 +91,9 @@ const App = React.memo(() => {
 		) : (
 			<section>
 				<Switch>
-					<Route path={'/login'} component={Login} />
-					<Redirect to={'/login'} />
+					<Route path={'/Home'} component={Home}/>
+					<Route path='/login' component={Login} />
+					<Redirect to={'/Home'} />
 				</Switch>
 			</section>
 		);

@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { load } from 'react-cookies';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {Toast}  from './../../utils/common-utils';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, {
 	PaginationListStandalone,
@@ -39,7 +40,6 @@ import Header from '../../components/header';
 import DateFilter from '../../components/date-filter';
 import API_CALL from '../../services';
 import moment from 'moment';
-import { labReport } from './sample';
 import FormField from '../../components/form-field';
 import { Link, useHistory } from 'react-router-dom';
 import { getAcademicYear, setActiveAcademicYear } from '../../services/basic-details/action';
@@ -48,7 +48,8 @@ import { staticVariables } from '../../utils/constants';
 const Dashboard = () => {
 	const [ loader, setLoader ] = useState(false),
 		[ classGroup, setClassGroup ] = useState([]),
-		[ messages, setMessages ] = useState([]);
+		[ messages, setMessages ] = useState([]),
+			[pageNo, setPageNo] = useState(1);
 
 	const {
 			summaryFilter,
@@ -99,6 +100,9 @@ const Dashboard = () => {
 		},
 		[ classGroup ]
 	);
+	useEffect(()=> {
+		//formRef.current.handleSubmit();
+	},[pageNo])
 	async function downloadFile(id, filename) {
 		let fileName = `${id + filename}`;
 		console.log(fileName);
@@ -121,13 +125,37 @@ const Dashboard = () => {
 				}
 			}
 		});
-		// const response333 = await fetch(
-		// 	`https://redirect-dev.ae-erp.in/Ae-Erp-Api_DH/Admincommunication/CommunicationDownloadpdf?fileName=${fileName}&applicationname=${applicationname}`
-		// );
-		// let result44 = await response333.json();
-		// console.log(result44);
-		// let samplePdf = '';
-		// //window.open('data:application/pdf;base64,' + result44);
+		
+	}
+	async function deletePost(id, filename1) {
+	
+		console.log(filename1);
+	
+	
+		let Id = id;
+	
+		let Filename = filename1;
+		API_CALL({
+			method: 'post',
+			url: `Admincommunication/Deletecommunication`,
+			params: {
+				 SchoolBranchCode : userDetails.Userbranch,
+		 AcadamicYear : academicYear[0].U_VALUS,
+		 Classgroup : classGroup[0].U_VALUS,
+		 UserMailID : email,
+		Id ,
+		 pagern: pageNo,
+		 Filename 
+
+			},
+			callback: async ({ status, data }) => {
+				if (status == 200) {
+					alert("done");
+					
+				}
+			}
+		});
+		
 	}
 	return (
 		<div className="container-fluid container-xl dashboard">
@@ -201,8 +229,8 @@ const Dashboard = () => {
 								</Col>
 							</Row>
 						)}
-					</Formik>
-
+						</Formik>
+										<div>
 					{messages.length > 0 ? (
 						<ListGroup>
 							{messages.map((mes) => {
@@ -211,7 +239,31 @@ const Dashboard = () => {
 										<CardHeader className="d-flex justify-content-between align-items-center bg-btn-primary text-white">
 											<div className="text-uppercase">{mes.ReportedBycode}</div>
 											<div>{mes.Classgroup}</div>
-											<Button color="link" size="sm" className="bg-white">
+											<Button color="link" size="sm" className="bg-white" onClick={()=> {
+													API_CALL({
+														method: 'post',
+														url: `Admincommunication/Deletecommunication`,
+														data: {
+															SchoolBranchCode : formRef.current.values.Branch,
+													 AcadamicYear : activeAcademicYear,
+													 Classgroup : formRef.current.values.ClassGroup,
+													 UserMailID : email,
+													Id :mes.Id.toString(),
+													 pagern: pageNo,
+													 Filename :mes.filename
+											
+														},
+														callback: async ({ status, data }) => {
+															if (status == 200) {
+																
+																Toast.add({message:"Deleted Successfully",type:'success'});
+																formRef.current.handleSubmit();
+																
+															}
+														}
+													});
+													
+											}}>
 												<FontAwesomeIcon
 													icon={[ 'fas', 'trash-alt' ]}
 													className="text-danger "
@@ -253,6 +305,7 @@ const Dashboard = () => {
 							<Empty description={'No Notification found'} />
 						</Card>
 					)}
+					</div>
 				</div>
 			)}
 		</div>
