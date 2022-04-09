@@ -209,11 +209,13 @@ const Dashboard = () => {
 								return (
 									<Card className="mx-1 my-3">
 										<CardHeader className="d-flex justify-content-between align-items-center bg-btn-primary text-white">
-											<div>{mes.PostedDate}</div>
-											<div>{mes.ReportedBycode}</div>
+											<div className="text-uppercase">{mes.ReportedBycode}</div>
 											<div>{mes.Classgroup}</div>
-											<Button color="link">
-												<FontAwesomeIcon icon={[ 'fas', 'trash-alt' ]} className="text-white" />
+											<Button color="link" size="sm" className="bg-white">
+												<FontAwesomeIcon
+													icon={[ 'fas', 'trash-alt' ]}
+													className="text-danger "
+												/>
 											</Button>
 										</CardHeader>
 										<CardBody>
@@ -239,7 +241,9 @@ const Dashboard = () => {
 												)}
 											</div>
 										</CardBody>
-										<CardFooter>Thank you</CardFooter>
+										<CardFooter className="d-flex justify-content-end bg-btn-primary text-white">
+											<div>{mes.PostedDate}</div>
+										</CardFooter>
 									</Card>
 								);
 							})}
