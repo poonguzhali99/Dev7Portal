@@ -1,3 +1,41 @@
-.dashboard {
-	margin-top: 3rem;
+// .dashboard {
+// 	height: calc(calc(var(--vh, 1vh) * 100) - 110px);
+// 	// &::before {
+// 	// 	content: "";
+
+// 	// 	z-index: 1;
+// 	// 	// width: 50px;
+// 	// 	top: 0;
+// 	// 	bottom: 0;
+// 	// 	background-color: rgba($color: $dark, $alpha: 0.08);
+// 	// }
+// }
+#app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > span.ck-file-dialog-button > button{
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > button:nth-child(13) > svg{
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > div:nth-child(14) > button > svg.ck.ck-icon.ck-button__icon{
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > div:nth-child(15) > button{
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > div:nth-child(14) > button{
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > button:nth-child(16) > svg{
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > button:nth-child(17){
+    display: none;
+}
+.textarea1 {
+    width: 70%;
+    height: 70%;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 15px;
+  
 }

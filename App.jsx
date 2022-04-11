@@ -3,7 +3,7 @@ import { Route, BrowserRouter, Switch, Redirect,NavLink,Link } from 'react-route
 import { ReactNotifications } from 'react-notifications-component';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { load } from 'react-cookies';
-
+import Home from "./src/pages/Home";
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
@@ -24,13 +24,15 @@ import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.c
 import 'react-tagsinput/react-tagsinput.css';
 import 'react-datetime/css/react-datetime.css';
 import Login from './src/pages/login';
-import Home from './src/pages/Home';
+
 import { logIn, logOut } from './src/services/auth/action';
 import { getUserDetails } from './src/utils/common-utils';
 import Sidebar from './src/components/sidebar';
 import Header from './src/components/header';
 
 const App = React.memo(() => {
+	const { SubMenu } = Menu;
+	const { Content, Footer, Sider } = Layout;
 	const dispatch = useDispatch();
 	const { isLoggedIn } = useSelector(({ authReducer }) => {
 		return {
@@ -76,26 +78,37 @@ const App = React.memo(() => {
 
 	const renderSection = () =>
 		isLoggedIn ? (
-			<section>
-				<div className="d-flex">
-					{/* <Header /> */}
-					<Sidebar />
-					<Switch>
-						{routes.map((route, index) => (
-							<Route key={index} path={route.path} exact={route.exact} children={<route.main />} />
-						))}
-						<Redirect to="/dashboard" />
-					</Switch>
-				</div>
-			</section>
+			// <section>
+			<Layout>
+				<Header />
+				<Sidebar />
+				{/* <Layout> */}
+				<Layout className="site-layout">
+					<Content className="body-content" style={{ margin: '110px 0 0 280px', overflow: 'auto' }}>
+						<Switch>
+							{routes.map((route, index) => (
+								<Route key={index} path={route.path} exact={route.exact} children={<route.main />} />
+							))}
+							<Redirect to="/dashboard" />
+						</Switch>
+					</Content>
+				</Layout>
+			</Layout>
 		) : (
-			<section>
-				<Switch>
-					<Route path={'/Home'} component={Home}/>
-					<Route path='/login' component={Login} />
-					<Redirect to={'/Home'} />
-				</Switch>
-			</section>
+			// </section>
+			<Layout>
+				<Header />
+				{/* <Layout> */}
+				<Layout className="site-layout">
+					<Content className="body-content" style={{ margin: '110px 0 0 0', overflow: 'auto' }}>
+						<Switch>
+							<Route path={'/home'} component={Home} />
+							<Route path={'/login'} component={Login} />
+							<Redirect to={'/home'} />
+						</Switch>
+					</Content>
+				</Layout>
+			</Layout>
 		);
 	return (
 		<BrowserRouter>

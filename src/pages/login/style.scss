@@ -1,4 +1,6 @@
 .login {
+	margin-top: 10px;
+
 	&::before {
 		position: fixed;
 		width: 100%;
@@ -29,6 +31,12 @@
 	}
 
 	// margin-bottom: 2rem;
+	.login-row{
+		padding: 0 60px 0 10px;
+	}
+	.login-col{
+		text-align: center;
+	}
 	.media {
 		&.patient_media {
 			background: linear-gradient(60deg, #26c6da, #00acc1);

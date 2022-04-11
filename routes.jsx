@@ -11,7 +11,7 @@ export const routes = [
 		exact: true,
 		icon: 'home',
 		main: () => <Dashboard />
-	}
+	},
 	// {
 	// 	path: '/home',
 	// 	name: 'Home',

@@ -28,9 +28,10 @@ const Login = () => {
 		<div>
 			{/* <Header /> */}
 			<div className="container-fluid login">
-				<Row className="d-flex">
-					<Col>
-						<img src={bpLogin} />
+				<Row className='login-row'>
+					{/* className="d-flex justify-content-center align-items-center"> */}
+					<Col className='login-col'>
+						<img col-12 col-sm-12 col-md-10 col-lg-5 col-xl-5 src={bpLogin} />
 					</Col>
 
 					<Col xs={12} sm={12} md={{ size: 10 }} lg={{ size: 5 }} xl={{ size: 5 }}>

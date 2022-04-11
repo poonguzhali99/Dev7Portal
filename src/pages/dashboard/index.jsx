@@ -2,14 +2,18 @@ import React, { lazy, Suspense, useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { load } from 'react-cookies';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Pagination from '@material-ui/lab/Pagination';
 import {Toast}  from './../../utils/common-utils';
 import BootstrapTable from 'react-bootstrap-table-next';
+import parse from 'html-react-parser';
 import paginationFactory, {
 	PaginationListStandalone,
 	PaginationProvider,
 	SizePerPageDropdownStandalone
 } from 'react-bootstrap-table2-paginator';
 import _isEmpty from 'lodash/isEmpty';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 import './style.scss';
 
@@ -49,7 +53,9 @@ const Dashboard = () => {
 	const [ loader, setLoader ] = useState(false),
 		[ classGroup, setClassGroup ] = useState([]),
 		[ messages, setMessages ] = useState([]),
-			[pageNo, setPageNo] = useState(1);
+		[count,setcount]=useState("1"),
+		[pageNo, setPageNo] = useState(1),
+		[enteredMessage,setenteredMessage]=useState("");
 
 	const {
 			summaryFilter,
@@ -67,7 +73,10 @@ const Dashboard = () => {
 	let email = load('session');
 
 	const formRef = useRef();
-
+	const handleClick = (event, value) => {
+        setPageNo(value);
+    };
+	let pageno = Math.ceil(count / 5);
 	useEffect(() => {
 		dispatch(getAcademicYear());
 	}, []);
@@ -98,11 +107,11 @@ const Dashboard = () => {
 		() => {
 			classGroup.length > 0 && formRef.current.handleSubmit();
 		},
-		[ classGroup ]
+		[ classGroup ,pageNo]
 	);
-	useEffect(()=> {
-		//formRef.current.handleSubmit();
-	},[pageNo])
+	// useEffect(()=> {
+	// 	formRef.current.handleSubmit();
+	// },[pageNo])
 	async function downloadFile(id, filename) {
 		let fileName = `${id + filename}`;
 		console.log(fileName);
@@ -127,25 +136,25 @@ const Dashboard = () => {
 		});
 		
 	}
-	async function deletePost(id, filename1) {
+	async function submitPost() {
 	
-		console.log(filename1);
-	
-	
-		let Id = id;
-	
-		let Filename = filename1;
+		
 		API_CALL({
 			method: 'post',
-			url: `Admincommunication/Deletecommunication`,
-			params: {
+			url: `Admincommunication/Saveadmncommunication`,
+			data: {
 				 SchoolBranchCode : userDetails.Userbranch,
-		 AcadamicYear : academicYear[0].U_VALUS,
-		 Classgroup : classGroup[0].U_VALUS,
-		 UserMailID : email,
-		Id ,
-		 pagern: pageNo,
-		 Filename 
+				 AcadamicYear : activeAcademicYear,
+				 Classgroup : "All Parents",
+				 ReportedBy : email,
+	
+				 pagern : pageNo,
+				 Filename :null,
+				 ReportedBycode :'Admin',
+				 Role : 'Admin',
+				 ParentMessage : enteredMessage,
+				 file : null,
+				 LinkName : null
 
 			},
 			callback: async ({ status, data }) => {
@@ -159,8 +168,6 @@ const Dashboard = () => {
 	}
 	return (
 		<div className="container-fluid container-xl dashboard">
-			<Header />
-
 			<h3>Notification Groups</h3>
 			{classGroup.length > 0 && (
 				<div>
@@ -174,16 +181,19 @@ const Dashboard = () => {
 						onSubmit={(values) => {
 							API_CALL({
 								method: 'get',
-								url: 'Admincommunication/GetMessagesListMobile',
+								url: 'Admincommunication/GetMessagesList',
 								params: {
 									SchoolBranchCode: values.Branch,
 									AcadamicYear: values.AcademicYear,
 									Classgroup: values.ClassGroup,
-									UserMailID: email
-									// pagern: 1
+									UserMailID: email,
+									 pagern: pageNo
 								},
 								callback: async ({ status, data }) => {
-									if (status == 200) setMessages(data.GetMessages);
+									if (status == 200) 
+									{	setMessages(data.GetMessages);
+                                        setcount(data.GetPaging.Total);
+									}
 									else setMessages([]);
 								}
 							});
@@ -231,6 +241,48 @@ const Dashboard = () => {
 						)}
 						</Formik>
 										<div>
+											<Card style={{marginTop:"10px"}}>
+											<CKEditor
+                            editor={ClassicEditor}
+                            className="textarea1"
+                            placeholder="Post a message"
+                            data={enteredMessage}
+                            onReady={(editor) => {
+                                // You can store the "editor" and use when it is needed.
+                                console.log('Editor is ready to use!', editor);
+                            }}
+                            onBlur={(event, editor) => {
+                                console.log('Blur.', editor);
+                            }}
+                            onFocus={(event, editor) => {
+                                console.log('Focus.', editor);
+                            }}
+                            onChange={(event, editor) => {
+                                const data = editor.getData();
+                                 setenteredMessage(data);
+                            }}
+                            required
+                        />
+											</Card>
+											<Card style={{marginTop:"8px"}}>
+											<div className="textarea1">
+                            <div style={{ display: 'flex', flex: 'space-between' }}>
+                                <input
+                                    type="file"
+                                    style={{ color: 'blue', fontSize: '15px' }}
+                                    // onChange={changeHandlerfile}
+                                />
+                                <input
+                                    type="url"
+                                    placeholder="Enter Link"
+                                    id="link"
+                                    // value={enterdLink}
+                                    // onChange={linkHandler}
+                                />
+                                <Button   onClick={submitPost} >submit</Button>
+                            </div>
+							</div>
+											</Card>
 					{messages.length > 0 ? (
 						<ListGroup>
 							{messages.map((mes) => {
@@ -271,7 +323,7 @@ const Dashboard = () => {
 											</Button>
 										</CardHeader>
 										<CardBody>
-											<div>{mes.ParentMessage}</div>
+											<div>{parse(mes.ParentMessage)}</div>
 											<Link
 												to="http://localhost:3000/Notification/download"
 												onClick={() => downloadFile(mes.Id, mes.filename)}
@@ -306,6 +358,10 @@ const Dashboard = () => {
 						</Card>
 					)}
 					</div>
+					<Card className="mt-3"  >
+					<Pagination color="primary" size="large" count={pageno} value={pageNo} onChange={handleClick}  />
+					 {/* <p>Total:{count}</p>  */}
+						</Card>
 				</div>
 			)}
 		</div>
