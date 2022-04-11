@@ -6,6 +6,9 @@ import _omit from 'lodash/omit';
 import _get from 'lodash/get';
 import './style.scss';
 
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 const generateComponent = (data) => {
 	let {
 		type,
@@ -102,6 +105,60 @@ const generateComponent = (data) => {
 						</InputGroupAddon>
 					)}
 				</InputGroup>
+				<div className={`customError ${error ? 'inValid' : ''}`}>{error && errors[name]}</div>
+			</div>
+		);
+	} else if (type == 'file') {
+		let error = errors[name] && touched[name];
+		return (
+			<div>
+				<Input
+					type="file"
+					placeholder={placeholder}
+					disabled={disabled}
+					className={`form-control ${errors[name] && touched[name] ? 'input-error' : ''} ${addOn
+						? 'withAddon'
+						: ''}`}
+					{...field}
+					autoFocus={autoFocus}
+					onChange={async ({ target: { files, value } }) => {
+						var reader = new FileReader();
+						reader.readAsDataURL(files[0]);
+						reader.onload = async () => {
+							await form.setFieldValue(field.name, value);
+							handleOnChange && handleOnChange(reader.result);
+						};
+					}}
+				/>
+				<div className={`customError ${error ? 'inValid' : ''}`}>{error && errors[name]}</div>
+			</div>
+		);
+	} else if (type == 'text-editor') {
+		let error = errors[name] && touched[name];
+		return (
+			<div>
+				<CKEditor
+					editor={ClassicEditor}
+					placeholder={placeholder}
+					data={field.value}
+					onReady={(editor) => {
+						// You can store the "editor" and use when it is needed.
+						console.log('Editor is ready to use!', editor);
+					}}
+					onBlur={(event, editor) => {
+						console.log('Blur.', editor);
+					}}
+					onFocus={(event, editor) => {
+						console.log('Focus.', editor);
+					}}
+					onChange={async (event, editor) => {
+						const data = editor.getData();
+						// setenteredMessage(data);
+						await form.setFieldValue(field.name, data);
+						handleOnChange && handleOnChange(data);
+					}}
+					required
+				/>
 				<div className={`customError ${error ? 'inValid' : ''}`}>{error && errors[name]}</div>
 			</div>
 		);
