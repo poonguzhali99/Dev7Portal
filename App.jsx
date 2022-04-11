@@ -4,6 +4,9 @@ import { ReactNotifications } from 'react-notifications-component';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { load } from 'react-cookies';
 import Home from "./src/pages/Home";
+import About from "./src/pages/about-us";
+import Privacy from "./src/pages/privacy";
+import Terms from "./src/pages/terms";
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
@@ -104,6 +107,9 @@ const App = React.memo(() => {
 						<Switch>
 							<Route path={'/home'} component={Home} />
 							<Route path={'/login'} component={Login} />
+							<Route path={'/About'} component={About} />
+							<Route path={'/Privacy'} component={Privacy} />
+							<Route path={'/Terms'} component={Terms} />
 							<Redirect to={'/home'} />
 						</Switch>
 					</Content>

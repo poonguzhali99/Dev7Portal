@@ -13,6 +13,8 @@ import logoutIcon from '../../assets/images/logoutIcon.svg';
 import { logOut } from '../../services/auth/action';
 import Sidebar from '../sidebar';
 import SideNav from './side-nav';
+import About from '../../pages/about-us';
+
 
 import { Layout, Menu, Breadcrumb } from 'antd';
 const Header = () => {
@@ -32,34 +34,37 @@ const Header = () => {
 		<Layout>
 			{isLoggedIn ? (
 				<Header className="header">
-					<div className="logo bg-white">
-						<img src={home} className="img" />
-					</div>
+					{/* <div className="logo bg-white">
+						 <img src={home} className="img" /> 
+					</div> */}
 					<Menu
 						className="bg-primary w-100 text-white align-items-center justify-content-end"
 						mode="horizontal"
 					>
-						<Menu.Item key="1">Home</Menu.Item>
+						<Menu.Item key="">Home</Menu.Item>
 						<Menu.Item key="2">Communication</Menu.Item>
 						<Menu.Item key="3">Edit Profile</Menu.Item>
 						<Menu.Item key="4" onClick={() => dispatch(logOut())}>
 							Logout
 						</Menu.Item>
 					</Menu>
-					{/* <img src={erplogo} className="img" /> */}
+					<Link onClick={() => history.push('/Home')}>
+					<img src={erplogo} className="img"   />
+					</Link>
+					
 				</Header>
 			) : (
 				<Header className="header">
-					<div className="logo bg-white">
+					{/* <div className="logo bg-white">
 						<img src={home} className="img" />
-					</div>
+					</div> */}
 					<Menu
 						className="bg-primary w-100 text-white align-items-center justify-content-end"
 						mode="horizontal"
 					>
-						<Menu.Item key="1">About Us</Menu.Item>
-						<Menu.Item key="2">Privacy</Menu.Item>
-						<Menu.Item key="3">Terms & Conditions</Menu.Item>
+						<Menu.Item key="1" onClick={() => history.push('/About')} >About Us</Menu.Item>
+						<Menu.Item key="2" onClick={() => history.push('/Privacy')}>Privacy</Menu.Item>
+						<Menu.Item key="3"  onClick={() => history.push('/Terms')}>Terms & Conditions</Menu.Item>
 						<Menu.Item key="4">Contact Us</Menu.Item>
 					</Menu>
 					<img src={erplogo} className="img" />
