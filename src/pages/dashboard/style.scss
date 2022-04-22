@@ -10,8 +10,20 @@
 // 	// 	background-color: rgba($color: $dark, $alpha: 0.08);
 // 	// }
 // }
+.dashboard{
+    width: 72%;
+    margin-left: 0;
+    margin-top: 10px;
+    #app > section > section.ant-layout.site-layout > main > div > div.container-fluid.container-xl.dashboard > div:nth-child(2) > div:nth-child(2) > input{
+        padding-top: 10px;
+        padding-left: 3px;
+    }
+ 
 #app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > span.ck-file-dialog-button > button{
     display: none;
+}
+.ck .ck-content .ck-editor__editable .ck-rounded-corners .ck-editor__editable_inline .ck-blurred{
+    height: 200px;
 }
 #app > section > section.ant-layout.site-layout > main > div > div > div:nth-child(2) > div > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > button:nth-child(13) > svg{
     display: none;
@@ -38,4 +50,20 @@
     margin-left: 20px;
     padding: 15px;
   
+}
+#app > section > section.ant-layout.site-layout > main > div > div > form > div.my-2 > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > button:nth-child(10){
+    display:none
+}
+#app > section > section.ant-layout.site-layout > main > div > div > form > div.my-2 > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > span.ck-file-dialog-button{
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > form > div.my-2 > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > button:nth-child(13){
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > form > div.my-2 > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > div:nth-child(14) > button{
+    display: none;
+}
+#app > section > section.ant-layout.site-layout > main > div > div > form > div.my-2 > div.ck.ck-reset.ck-editor.ck-rounded-corners > div.ck.ck-editor__top.ck-reset_all > div > div.ck.ck-sticky-panel__content > div > div > div:nth-child(15) > button{
+    display: none;
+}
 }

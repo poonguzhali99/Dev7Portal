@@ -21,7 +21,9 @@
 .input-group > .form-control,
 .input-group > .form-select {
 	background-color: $white !important;
-	height: 45px;
+
+
+	border-radius: 10px;
 }
 
 .error {

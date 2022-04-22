@@ -1,0 +1,121 @@
+th {
+    // border: none !important;
+    z-index: 1;
+    background-color: lighten($color: $primaryButton, $amount: 0) !important;
+    color:$white !important;
+    position: sticky;
+    top: -1px;
+    vertical-align: middle;
+    border: 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+
+.v-none {
+    visibility: collapse;
+}
+
+.table {
+    overflow: auto !important;
+    table-layout: auto !important;
+    border: 1px solid #dee2e6;
+}
+
+.rdtPicker {
+    right: 0;
+}
+.react-bootstrap-table-pagination-total {
+    float: left !important;
+}
+.react-bs-table-sizePerPage-dropdown {
+    float: right;
+    padding-left: 10px;
+    button {
+        width: 54px !important;
+    }
+}
+.react-bootstrap-table-page-btns-ul {
+    margin-bottom: 0;
+    .page-link {
+        padding: 0.25rem 0.5rem;
+        border-radius: 2px !important;
+        box-shadow: none;
+    }
+    .page-item {
+        height: 31px;
+    }
+}
+.react-bs-table-sizePerPage-dropdown {
+    .btn {
+        padding: 0.25rem 0.5rem;
+        height: 31px;
+    }
+}
+.react-bootstrap-table .table-hover {
+    width: 1100px;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.react-bootstrap-table {
+   font-size: 12px;
+    tr {
+        &:hover {
+            background-color: lighten($color: $primary, $amount: 55) !important;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+            width: 1600px;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .react-bs-table-no-data {
+        &:hover {
+            background-color: #fff;
+           
+        }
+    }
+    td {
+     
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.dropdown-menu {
+    text-align: center;
+    left: -103px;
+}
+
+.list-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-weight: 700;
+    &:active {
+        background-color: $primary;
+        color: $white;
+    }
+    &:hover {
+        background-color: #e6f7ff;
+       
+        // color: $primary;
+    }
+}
+.bottomRow {
+    // position: fixed;
+    // top: 30px;
+    margin: 20px 0px 20px 0px;
+}
+.wrapcontainer {
+    white-space: nowrap;
+}
+// .outside {
+// 	position: relative;
+// 	// width: 200px;
+// 	// height: 200px;
+// 	background-color: #eee; /to make it visible/
+// }
+// .inside {
+// 	position: absolute;
+// 	bottom: 2px;

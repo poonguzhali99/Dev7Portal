@@ -15,6 +15,8 @@ import Header from '../../components/header';
 import { save } from 'react-cookies';
 
 const Login = () => {
+	let pathName = window.location.pathname;
+	console.log("login",pathName);
 	const history = useHistory(),
 		dispatch = useDispatch(),
 		[ loginError, setloginError ] = useState(false),
@@ -22,8 +24,14 @@ const Login = () => {
 		[ alreadyLogin, setAlreadyLogin ] = useState(false),
 		[ errorMessage, seterrorMessage ] = useState(),
 		[ loginCreds, setloginCreds ] = useState(),
+		[logo, setLogo]=useState("https://dev7.ae-erp.in/img/bplog.png"),
 		[ orgLogo, setOrgLogo ] = useState('');
-
+		useEffect(()=> {
+		
+			if (pathName == '/SLESBP') {
+			   setLogo("https://dev2.ae-erp.in/Content/img/SLESBPLOGO.png");
+			}
+		}, [pathName])
 	return (
 		<div>
 			{/* <Header /> */}
@@ -31,10 +39,10 @@ const Login = () => {
 				<Row className='login-row'>
 					{/* className="d-flex justify-content-center align-items-center"> */}
 					<Col className='login-col'>
-						<img col-12 col-sm-12 col-md-10 col-lg-5 col-xl-5 src={bpLogin} />
+						<img col-12 col-sm-12 col-md-10 col-lg-5 col-xl-5 src={bpLogin} style={{width:"83%"}} />
 					</Col>
 
-					<Col xs={12} sm={12} md={{ size: 10 }} lg={{ size: 5 }} xl={{ size: 5 }}>
+					<Col xs={12} sm={12} md={{ size: 9 }} lg={{ size: 4 }} xl={{ size: 5 }}>
 						<Loader show={loader} dark={true}>
 							{/* <Col> */}
 							{/* <Card className=""> */}
@@ -77,9 +85,9 @@ const Login = () => {
 								}}
 							>
 								{() => (
-									<Form>
-										<div className="mt-4 mb-4 text-left">
-											<h4 className="mb-0"> Login</h4>
+									<Form style={{marginTop:"-26px"}}>
+										<div className="mt-4 mb-3 text-left">
+											<h4 className="mb-0"><strong>Login</strong> </h4>
 										</div>
 										<FormGroup>
 											<Label>
@@ -102,7 +110,7 @@ const Login = () => {
 												Invalid Email/Password
 											</Alert>
 										</FormGroup>
-										<Row className="pb-4 pt-4 align-items-center">
+										<Row className="pb-0 pt-2 align-items-center">
 											<Col>
 												<div className="text-left pt-2 pb-2">
 													<Link to="">Forgot Password</Link>
@@ -114,6 +122,16 @@ const Login = () => {
 												</Button>
 											</Col>
 										</Row>
+										<Row className="pb-0 pt-2 align-items-center">
+										<Col>
+											<p><input type="checkbox" checked="checked" /> &nbsp;I have read and accept the Terms & Conditions and Privacy Policy of AE ERP Portal.</p>
+										</Col>
+									</Row>
+									<Row className="pb-0 pt-4 align-items-center">
+										<Col>
+										<img  src="https://dev7.ae-erp.in/img/ksadmin.png" style={{width:"96%"}} />
+										</Col>
+									</Row>
 									</Form>
 								)}
 							</Formik>
@@ -121,7 +139,8 @@ const Login = () => {
 							{/* </Card> */}
 						</Loader>
 					</Col>
-				</Row>
+				</Row >
+				<Row style={{justifyContent:"center",marginLeft:"150px",marginTop:"20px"}}>Copyright © 2020 AE Enterprises. All rights reserved.</Row>
 			</div>
 		</div>
 	);

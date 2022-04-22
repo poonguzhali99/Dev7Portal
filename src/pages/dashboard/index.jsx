@@ -50,24 +50,25 @@ import { getAcademicYear, setActiveAcademicYear } from '../../services/basic-det
 import { staticVariables } from '../../utils/constants';
 
 const Dashboard = () => {
-	const [ loader, setLoader ] = useState(false),
-		[ classGroup, setClassGroup ] = useState([]),
-		[ messages, setMessages ] = useState([]),
-		[ count, setcount ] = useState('1'),
-		[ pageNo, setPageNo ] = useState(1),
-		[ enteredMessage, setenteredMessage ] = useState('');
+	const [loader, setLoader] = useState(false),
+		[classGroup, setClassGroup] = useState([]),
+		[messages, setMessages] = useState([]),
+		[count, setcount] = useState('1'),
+		[pageNo, setPageNo] = useState(1),
+		[enteredMessage, setenteredMessage] = useState(''),
+		[file, setFile] = useState("");
 
 	const {
-			summaryFilter,
-			academicYear,
-			activeAcademicYear,
-			userDetails
-		} = useSelector(({ filterReducer, academicYearReducer, userDetailsReducer }) => ({
-			summaryFilter: filterReducer,
-			academicYear: academicYearReducer.response.availableAcademicYear,
-			activeAcademicYear: academicYearReducer.response.activeAcademicYear,
-			userDetails: userDetailsReducer.response
-		})),
+		summaryFilter,
+		academicYear,
+		activeAcademicYear,
+		userDetails
+	} = useSelector(({ filterReducer, academicYearReducer, userDetailsReducer }) => ({
+		summaryFilter: filterReducer,
+		academicYear: academicYearReducer.response.availableAcademicYear,
+		activeAcademicYear: academicYearReducer.response.activeAcademicYear,
+		userDetails: userDetailsReducer.response
+	})),
 		dispatch = useDispatch();
 	const history = useHistory();
 	let email = load('session');
@@ -100,14 +101,14 @@ const Dashboard = () => {
 				});
 			}
 		},
-		[ academicYear ]
+		[academicYear]
 	);
 
 	useEffect(
 		() => {
 			classGroup.length > 0 && formRef.current.handleSubmit();
 		},
-		[ classGroup, pageNo ]
+		[classGroup, pageNo]
 	);
 	// useEffect(()=> {
 	// 	formRef.current.handleSubmit();
@@ -143,36 +144,36 @@ const Dashboard = () => {
 			}
 		});
 	}
-	async function submitPost() {
-		API_CALL({
-			method: 'post',
-			url: `Admincommunication/Saveadmncommunication`,
-			data: {
-				SchoolBranchCode: userDetails.Userbranch,
-				AcadamicYear: activeAcademicYear,
-				Classgroup: 'All Parents',
-				ReportedBy: email,
+	// async function submitPost() {
+	// 	API_CALL({
+	// 		method: 'post',
+	// 		url: `Admincommunication/Saveadmncommunication`,
+	// 		data: {
+	// 			SchoolBranchCode: userDetails.Userbranch,
+	// 			AcadamicYear: activeAcademicYear,
+	// 			Classgroup: 'All Parents',
+	// 			ReportedBy: email,
 
-				pagern: pageNo,
-				Filename: null,
-				ReportedBycode: 'Admin',
-				Role: 'Admin',
-				ParentMessage: enteredMessage,
-				file: null,
-				LinkName: null
-			},
-			callback: async ({ status, data }) => {
-				if (status == 200) {
-					alert('done');
-				}
-			}
-		});
-	}
+	// 			pagern: pageNo,
+	// 			Filename: null,
+	// 			ReportedBycode: 'Admin',
+	// 			Role: 'Admin',
+	// 			ParentMessage: enteredMessage,
+	// 			file: null,
+	// 			LinkName: null
+	// 		},
+	// 		callback: async ({ status, data }) => {
+	// 			if (status == 200) {
+	// 				alert('done');
+	// 			}
+	// 		}
+	// 	});
+	// }
 	return (
-		<div className="container-fluid container-xl dashboard">
-			<h3>Notification Groups</h3>
+		<div>
+		<Card className='p-2'>	<h4 >&nbsp;Notification </h4></Card>
 			{classGroup.length > 0 && (
-				<div>
+				<div className='container-fluid container-xl dashboard'>
 					<Formik
 						innerRef={formRef}
 						initialValues={{
@@ -201,6 +202,7 @@ const Dashboard = () => {
 						}}
 					>
 						{({ values, handleSubmit }) => (
+							<Card className='p-2'>
 							<Row>
 								<Col>
 									<FormField
@@ -219,7 +221,7 @@ const Dashboard = () => {
 										list={staticVariables.branchList.filter(
 											(branch) => branch.id === userDetails.Userbranch
 										)}
-										disabled={true}
+									    disabled={true}
 										keyword="id"
 										label="name"
 									/>
@@ -240,15 +242,61 @@ const Dashboard = () => {
 								</Col>
 								{/* <Card style={{ marginTop: '10px' }}> */}
 							</Row>
+							</Card>
 						)}
 					</Formik>
 					<Formik
-						initialValues={{}}
+
+						initialValues={{
+
+							file: '',
+                           
+
+						}}
+						enableReinitialize={true}
+
 						onSubmit={(values) => {
-							console.log('Submited');
+							let fileArray = values.file.split('\\'),
+						filename = fileArray[fileArray.length - 1];
+
+							console.log("fileArray", fileArray,"filename", filename );
+							API_CALL({
+								method: 'post',
+								url: 'Admincommunication/Saveadmncommunication',
+								data: {
+									SchoolBranchCode: formRef.current.values.Branch,
+									AcadamicYear: activeAcademicYear,
+									Classgroup: formRef.current.values.ClassGroup,
+									ReportedBy: email,
+									pagern: pageNo,
+									Filename:filename,
+									ReportedBycode: userDetails.Userrole,
+									Role: userDetails.Userrole,
+									ParentMessage: enteredMessage,
+									file: file,
+									LinkName: null
+								},
+								callback: async ({ status, data }) => {
+									if (status == 200) {
+										Toast.add({
+											message: 'Posted Successfully',
+											type: 'success'
+										});
+										
+										formRef.current.handleSubmit();
+										window.location.reload(false);
+										// setFieldValue('file', '');
+										// setFile('');
+										// setenteredMessage('')
+
+									}
+								}
+							});
+
 						}}
 					>
-						<Form>
+						{({values, setFieldValue, handleSubmit})=> (
+							<div>
 							<div className="my-2">
 								<CKEditor
 									editor={ClassicEditor}
@@ -278,67 +326,27 @@ const Dashboard = () => {
 								type="file"
 								name="file"
 								handleOnChange={(file) => {
-									let a = file.split(',')[1];
-									console.log('A', a);
-									// setFile(file);
+
+									console.log('file', file);
+									 setFile(file);
 								}}
 							/>
-							<Button type="submit" color="btn-primary" className="text-white">
+							<Button onClick={handleSubmit} color="btn-primary" className="text-white" style={{marginTop:"5px"}}>
 								Submit
 							</Button>
-						</Form>
+						</div>
+						)}
+						
 					</Formik>
 					<div>
-						{/* <Card style={{ marginTop: '10px' }}>
-							<CKEditor
-								editor={ClassicEditor}
-								className="textarea1"
-								placeholder="Post a message"
-								data={enteredMessage}
-								onReady={(editor) => {
-									// You can store the "editor" and use when it is needed.
-									console.log('Editor is ready to use!', editor);
-								}}
-								onBlur={(event, editor) => {
-									console.log('Blur.', editor);
-								}}
-								onFocus={(event, editor) => {
-									console.log('Focus.', editor);
-								}}
-								onChange={(event, editor) => {
-									const data = editor.getData();
-									setenteredMessage(data);
-								}}
-								required
-							/>
-						</Card>
-						<Card style={{ marginTop: '8px' }}>
-							<div className="textarea1">
-								<div style={{ display: 'flex', flex: 'space-between' }}>
-									<input
-										type="file"
-										style={{ color: 'blue', fontSize: '15px' }}
-										// onChange={changeHandlerfile}
-										onChange={(e) => console.log('E', e.target)}
-									/>
-									<input
-										type="url"
-										placeholder="Enter Link"
-										id="link"
-										// value={enterdLink}
-										// onChange={linkHandler}
-									/>
-									<Button onClick={submitPost}>submit</Button>
-								</div>
-							</div>
-						</Card> */}
+					
 						{messages.length > 0 ? (
 							<ListGroup>
 								{messages.map((mes) => {
 									return (
 										<Card className="mx-1 my-3">
 											<CardHeader className="d-flex justify-content-between align-items-center bg-btn-primary text-white">
-												<div className="text-uppercase">{mes.ReportedBycode}</div>
+												<div className="text-uppercase">{mes.PostedDate}</div>
 												<div>{mes.Classgroup}</div>
 												<Button
 													color="link"
@@ -370,7 +378,7 @@ const Dashboard = () => {
 													}}
 												>
 													<FontAwesomeIcon
-														icon={[ 'fas', 'trash-alt' ]}
+														icon={['fas', 'trash-alt']}
 														className="text-danger "
 													/>
 												</Button>
@@ -380,8 +388,8 @@ const Dashboard = () => {
 												<Link
 													to="http://localhost:3000/Notification/download"
 													onClick={() => downloadFile(mes.Id, mes.filename)}
-													//href=""
-													//target="_blank"
+												//href=""
+												//target="_blank"
 												>
 													{mes.filename}
 												</Link>
@@ -389,22 +397,23 @@ const Dashboard = () => {
 													{mes.LinkName != '' && (
 														<Link
 															to={mes.LinkName}
-															// onClick={() => downloadFile(mes.Id, mes.filename)}
-															//href=""
-															//target="_blank"
+														// onClick={() => downloadFile(mes.Id, mes.filename)}
+														//href=""
+														//target="_blank"
 														>
 															{mes.LinkName}
 														</Link>
 													)}
 												</div>
 											</CardBody>
-											<CardFooter className="d-flex justify-content-end bg-btn-primary text-white">
-												<div>{mes.PostedDate}</div>
+											<CardFooter className="d-flex justify-content-end bg-muted text-black footer">
+												<div>{mes.ReportedBycode}</div>
 											</CardFooter>
 										</Card>
 									);
 								})}
 							</ListGroup>
+
 						) : (
 							<Card className="mt-3">
 								<Empty description={'No Notification found'} />

@@ -122,11 +122,12 @@ const generateComponent = (data) => {
 					{...field}
 					autoFocus={autoFocus}
 					onChange={async ({ target: { files, value } }) => {
+						await form.setFieldValue(field.name, value);
 						var reader = new FileReader();
 						reader.readAsDataURL(files[0]);
 						reader.onload = async () => {
-							await form.setFieldValue(field.name, value);
-							handleOnChange && handleOnChange(reader.result);
+							
+							handleOnChange && handleOnChange(reader.result.split(',')[1]);
 						};
 					}}
 				/>

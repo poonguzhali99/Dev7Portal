@@ -7,11 +7,13 @@ import Home from "./src/pages/Home";
 import About from "./src/pages/about-us";
 import Privacy from "./src/pages/privacy";
 import Terms from "./src/pages/terms";
+import Marksentry from './src/pages/marksentry';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 
 //Components
 import Spinner from './src/components/spinner';
+
 import { routes } from './routes';
 import Loader from './src/components/Loader';
 
@@ -34,6 +36,7 @@ import Sidebar from './src/components/sidebar';
 import Header from './src/components/header';
 
 const App = React.memo(() => {
+
 	const { SubMenu } = Menu;
 	const { Content, Footer, Sider } = Layout;
 	const dispatch = useDispatch();
@@ -106,10 +109,14 @@ const App = React.memo(() => {
 					<Content className="body-content" style={{ margin: '110px 0 0 0', overflow: 'auto' }}>
 						<Switch>
 							<Route path={'/home'} component={Home} />
-							<Route path={'/login'} component={Login} />
+							<Route path={'/SLESBP'} component={Login} />
 							<Route path={'/About'} component={About} />
 							<Route path={'/Privacy'} component={Privacy} />
 							<Route path={'/Terms'} component={Terms} />
+							<Route path={'/SLESKS'} component={Login} />
+							<Route path={'/SLESAK'} component={Login} />
+							<Route path={'/LEETMP'} component={Login} />
+							<Route path={'/SLESWMA'} component={Login} />
 							<Redirect to={'/home'} />
 						</Switch>
 					</Content>

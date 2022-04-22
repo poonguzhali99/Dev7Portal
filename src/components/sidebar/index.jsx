@@ -50,26 +50,29 @@ const Sidebar = () => {
 						Notification Groups
 					</Menu.Item>
 					{/* </SubMenu> */}
-					<SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-						<Menu.Item key="5" onClick={() => history.push('/home')}>
-							option5
+					<SubMenu key="sub2" icon={<LaptopOutlined />} title="Assessment">
+						<Menu.Item key="5" onClick={() => history.push('/marksentry')}>
+							Marks Entry
 						</Menu.Item>
-						<Menu.Item key="6">option6</Menu.Item>
-						<Menu.Item key="7">option7</Menu.Item>
-						<Menu.Item key="8">option8</Menu.Item>
+						<Menu.Item key="6"  onClick={() => history.push('/reportcard')}>Report Card</Menu.Item>
+						<Menu.Item key="7"
+						onClick={() => history.push('/marksentrystatus')} >Marks Entry Status</Menu.Item>
+					
 					</SubMenu>
-					<SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-						<Menu.Item key="9">option9</Menu.Item>
-						<Menu.Item key="10">option10</Menu.Item>
-						<Menu.Item key="11">option11</Menu.Item>
-						<Menu.Item key="12">option12</Menu.Item>
+					<SubMenu key="sub3" icon={<LaptopOutlined />} title="New Admissions">
+						<Menu.Item key="8" onClick={() => history.push('/newadmissionsetup')}>
+							 Admissions Setup
+						</Menu.Item>
+						<Menu.Item key="9"  onClick={() => history.push('/newadmissioncount')}>Admission Count</Menu.Item>
+						<Menu.Item key="10"
+						onClick={() => history.push('/marksentrystatus')} >Application Verification</Menu.Item>
+							<Menu.Item key="11"  onClick={() => history.push('/admissionplanning')}>Admission Planning View</Menu.Item>
+						<Menu.Item key="12"
+						onClick={() => history.push('/consolidated')} >Consolidated Stages Report</Menu.Item>
+					
 					</SubMenu>
-					<SubMenu key="sub4" icon={<NotificationOutlined />} title="subnav 3">
-						<Menu.Item key="13">option9</Menu.Item>
-						<Menu.Item key="14">option10</Menu.Item>
-						<Menu.Item key="15">option11</Menu.Item>
-						<Menu.Item key="16">option12</Menu.Item>
-					</SubMenu>
+				
+					
 				</Menu>
 			</Sider>
 		</Layout>

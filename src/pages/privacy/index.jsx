@@ -45,8 +45,8 @@ const Privacy =  () => {
                  <p className="about-content22">Contact Information </p>
                  <p className="about-content33">
                  If users have any questions or suggestions regarding our privacy policy, please contact us:
-                 <h3> St. Andrew Schools : contact@standrewsindia.com | Phone : +91 773 001 7050 </h3>
-                 <h3>Winmore Academy Schools : Info@winmoreacademy.com | Phone: +91 91484 49538 </h3>
+                 <h5> St. Andrew Schools : contact@standrewsindia.com | Phone : +91 773 001 7050 </h5>
+                 <h5>Winmore Academy Schools : Info@winmoreacademy.com | Phone: +91 91484 49538 </h5>
                  </p>
 
 
